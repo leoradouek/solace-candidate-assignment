@@ -1,3 +1,4 @@
+import { Advocate } from "@/types/advocates";
 import { useEffect, useState } from "react";
 
 interface UseAdvocatesParams {
@@ -7,10 +8,10 @@ interface UseAdvocatesParams {
 }
 
 export function useAdvocates({search = ""}: UseAdvocatesParams) {
-  const [advocates, setAdvocates] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [totalCount, setTotalCount] = useState(0);
-  const [error, setError] = useState(null);
+  const [advocates, setAdvocates] = useState<Advocate[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     setLoading(true);

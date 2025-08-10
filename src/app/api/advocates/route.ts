@@ -2,6 +2,7 @@ import { or } from "drizzle-orm/expressions";
 import { sql } from "drizzle-orm";
 import db from "../../../db";
 import { advocates } from "../../../db/schema";
+import { formatPhoneNumber } from "@/utils/formatAdvocates";
 
 export async function GET(req: Request) {
   try {
@@ -29,7 +30,13 @@ export async function GET(req: Request) {
       query = query.where(() => or(...conditions));
     }
 
-    const data = await query;
+    let data = await query;
+
+    // Format phone number
+    data = data.map((advocate) => ({
+      ...advocate,
+      phoneNumber: formatPhoneNumber(advocate.phoneNumber.toString()),
+    }));
     return Response.json({ data });
   } catch (error) {
     console.error("Error in GET /api/advocates:", error);
