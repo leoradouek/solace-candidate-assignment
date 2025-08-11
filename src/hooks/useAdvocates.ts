@@ -13,6 +13,7 @@ export function useAdvocates({search = ""}: UseAdvocatesParams) {
   const [loading, setLoading] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [error, setError] = useState<Error | null>(null);
+  const [success, setSuccess] = useState<boolean>(false)
 
   useEffect(() => {
     setLoading(true);
@@ -26,11 +27,12 @@ export function useAdvocates({search = ""}: UseAdvocatesParams) {
           specialties: formatSpecialtiesAlphabetically(advocate.specialties)
         }));
         setAdvocates(formattedData);
+        setSuccess(true)
         setTotalCount(formattedData.length);
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, [search]);
 
-  return { advocates, loading, totalCount, error };
+  return { advocates, loading, totalCount, error, success };
 }
