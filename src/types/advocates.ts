@@ -6,6 +6,6 @@ export type Advocate = {
   degree: string;
   specialties: string[];
   yearsOfExperience: number;
-  phoneNumber: number;
+  phoneNumber: string;
   createdAt: string;
 };

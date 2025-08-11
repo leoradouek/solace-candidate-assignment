@@ -1,8 +1,7 @@
-import { or } from "drizzle-orm/expressions";
+import { or, eq, asc } from "drizzle-orm/expressions";
 import { sql } from "drizzle-orm";
 import db from "../../../db";
 import { advocates } from "../../../db/schema";
-import { formatPhoneNumber } from "@/utils/formatAdvocates";
 
 export async function GET(req: Request) {
   try {
@@ -20,23 +19,18 @@ export async function GET(req: Request) {
         sql`LOWER(${advocates.lastName}) LIKE LOWER(${term})`,
         sql`LOWER(${advocates.city}) LIKE LOWER(${term})`,
         sql`LOWER(${advocates.degree}) LIKE LOWER(${term})`,
-        sql`${advocates.specialties} @> ${sql`to_jsonb(array[${search}])`}`,
       ];
 
       if (!isNaN(years)) {
-        conditions.push(advocates.yearsOfExperience.equals(years));
+        conditions.push(eq(advocates.yearsOfExperience, years));
       }
 
-      query = query.where(() => or(...conditions));
+      query = query.where(or(...conditions));
     }
 
-    let data = await query;
+    query = query.orderBy(asc(advocates.lastName), asc(advocates.firstName));
 
-    // Format phone number
-    data = data.map((advocate) => ({
-      ...advocate,
-      phoneNumber: formatPhoneNumber(advocate.phoneNumber.toString()),
-    }));
+    const data = await query;
     return Response.json({ data });
   } catch (error) {
     console.error("Error in GET /api/advocates:", error);
