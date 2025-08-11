@@ -18,7 +18,12 @@ export function useAdvocates({search = ""}: UseAdvocatesParams) {
   useEffect(() => {
     setLoading(true);
     fetch(`/api/advocates?search=${search}`)
-      .then((res) => res.json())
+     .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
           // Format phone number
         const formattedData = data?.data?.map((advocate: Advocate) => ({
