@@ -22,7 +22,7 @@ export default function Home() {
        }
       </div>
       
-      {success && advocates.length !== 0 ? 
+      {success && advocates?.length !== 0 ? 
         <AdvocatesTable advocates={advocates}/>
       : <BlankStates success={success} error={error} loading={loading} advocates={advocates} searchTerm={searchTerm}/>}
      

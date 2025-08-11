@@ -22,7 +22,7 @@ export default function AdvocatesTable({ advocates }: Props) {
         </tr>
       </thead>
       <tbody>
-        {advocates.map((advocate, idx) => (
+        {advocates?.map((advocate, idx) => (
           <tr
             key={idx}
             className={idx % 2 === 0 ? "bg-[#1d4339]" : "bg-[#415550]"}
