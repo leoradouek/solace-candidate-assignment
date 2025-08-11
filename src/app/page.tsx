@@ -22,7 +22,8 @@ export default function Home() {
       </div>
       {loading && <div className= "h-[90vh] flex items-center justify-center">Loading...</div>}
       {error && <div className= "h-[90vh] flex items-center justify-center"> There was an error retrieving the advocates. Please try refreshing the page. </div>}
-      {success && <AdvocatesTable advocates={advocates}/>}
+      {success && advocates.length === 0 && searchTerm && <div className= "h-[80vh] flex items-center justify-center">We couldn&apos;t find any matching results for {searchTerm}. Please try again.</div>}
+      {success && advocates.length !== 0 && <AdvocatesTable advocates={advocates}/>}
      
     </main>
   );
