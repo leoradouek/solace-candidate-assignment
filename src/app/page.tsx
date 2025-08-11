@@ -4,6 +4,7 @@ import { useState } from "react";
 import AdvocatesTable from "@/components/AdvocatesTable/AdvocatesTable";
 import SearchBar from "@/components/SearchBar";
 import { useAdvocates } from "@/hooks/useAdvocates";
+import BlankStates from "@/components/AdvocatesTable/BlankStates";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,10 +21,10 @@ export default function Home() {
           </div>
        }
       </div>
-      {loading && <div className= "h-[90vh] flex items-center justify-center">Loading...</div>}
-      {error && <div className= "h-[90vh] flex items-center justify-center"> There was an error retrieving the advocates. Please try refreshing the page. </div>}
-      {success && advocates.length === 0 && searchTerm && <div className= "h-[80vh] flex items-center justify-center">We couldn&apos;t find any matching results for {searchTerm}. Please try again.</div>}
-      {success && advocates.length !== 0 && <AdvocatesTable advocates={advocates}/>}
+      
+      {success && advocates.length !== 0 ? 
+        <AdvocatesTable advocates={advocates}/>
+      : <BlankStates success={success} error={error} loading={loading} advocates={advocates} searchTerm={searchTerm}/>}
      
     </main>
   );
