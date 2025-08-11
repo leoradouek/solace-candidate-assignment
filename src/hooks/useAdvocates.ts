@@ -1,5 +1,6 @@
 import { Advocate } from "@/types/advocates";
 import { useEffect, useState } from "react";
+import {formatPhoneNumber} from "../utils/formatAdvocates"
 
 interface UseAdvocatesParams {
   search?: string;
@@ -18,7 +19,12 @@ export function useAdvocates({search = ""}: UseAdvocatesParams) {
     fetch(`/api/advocates?search=${search}`)
       .then((res) => res.json())
       .then((data) => {
-        setAdvocates(data.data);
+         // Format phone number
+        const formattedData = data?.data?.map((advocate: Advocate) => ({
+          ...advocate,
+          phoneNumber: formatPhoneNumber(advocate.phoneNumber?.toString()),
+        }));
+        setAdvocates(formattedData);
         setTotalCount(data.totalCount);
       })
       .catch((err) => setError(err))

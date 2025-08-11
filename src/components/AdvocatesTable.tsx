@@ -19,7 +19,7 @@ export default function AdvocatesTable({ advocates }: Props) {
         </tr>
       </thead>
       <tbody>
-        {advocates.map((advocate, idx) => (
+        {advocates?.map((advocate, idx) => (
           <tr key={idx}>
             <td>{advocate.firstName}</td>
             <td>{advocate.lastName}</td>
