@@ -14,17 +14,18 @@ export default function SearchBar({ searchTerm, setSearchTerm }: Props) {
 
   return (
     <div>
-      <p>Search</p>
-      <p>
-        Searching for: <span>{searchTerm}</span>
-      </p>
       <input
-        style={{ border: "1px solid black" }}
+        className="border border-black w-[80vw] p-2  mr-[10px] text-[#1d4339] rounded"
         value={searchTerm}
         onChange={onChange}
-        placeholder="Search..."
+        placeholder="Search by name, city, degree or specialty"
       />
-      <button onClick={onReset}>Reset Search</button>
+      <button
+        onClick={onReset}
+        aria-label="Clear search"
+      >
+        Reset
+      </button>
       <br />
       <br />
     </div>

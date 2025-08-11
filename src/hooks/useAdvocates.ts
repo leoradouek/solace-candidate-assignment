@@ -19,7 +19,7 @@ export function useAdvocates({search = ""}: UseAdvocatesParams) {
       .then((res) => res.json())
       .then((data) => {
         setAdvocates(data.data);
-        setTotalCount(data.totalCount);
+        setTotalCount(data.data.length);
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
