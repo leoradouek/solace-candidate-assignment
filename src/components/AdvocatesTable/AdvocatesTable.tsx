@@ -12,8 +12,8 @@ export default function AdvocatesTable({ advocates }: Props) {
     <table className="w-[95vw] cursor-default">
       <thead className="sticky top-[174px] bg-[#415550]">
         <tr className="bg-[#415550]" >
-          <th className={cellClassName}>First Name</th>
           <th className={cellClassName}>Last Name</th>
+          <th className={cellClassName}>First Name</th>
           <th className={cellClassName}>City</th>
           <th className={cellClassName}>Degree</th>
           <th className={cellClassName}>Specialties</th>
@@ -27,8 +27,8 @@ export default function AdvocatesTable({ advocates }: Props) {
             key={idx}
             className={idx % 2 === 0 ? "bg-[#1d4339]" : "bg-[#415550]"}
           >
-            <td className={cellClassName}>{advocate.firstName}</td>
             <td className={cellClassName}>{advocate.lastName}</td>
+            <td className={cellClassName}>{advocate.firstName}</td>
             <td className={cellClassName}>{advocate.city}</td>
             <td className={cellClassName}>{advocate.degree}</td>
             <td className={`${cellClassName} max-w-[200px] pr-16`}><SpecialtiesCell specialties={advocate.specialties}/></td>
